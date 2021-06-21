@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package v1;
+
+service TodoService {
+    rpc CreateTodo(CreateRequest) returns (CreateResponse);
+    rpc GetTodo(GetRequest) returns (GetResponse);
+    rpc GetAllTodo(GetAllRequest) returns (GetAllResponse);
+    rpc UpdateTodo(UpdateRequest) returns (UpdateResponse);
+    rpc DeleteTodo(DeleteRequest) returns (DeleteResponse);
+}
+
+message Todo {
+    int32 id = 1;
+    string title = 2;
+    string description = 3;
+    bool isComplete = 4;
+    string time = 5;
+}
+
+// CREATE
+message CreateRequest {
+    int32 api = 1;
+    Todo todo = 2;
+}
+
+message CreateResponse {
+    int32 api = 1;
+    Todo todo = 2;
+}
+
+// READ
+message GetRequest {
+    int32 api = 1;
+    int32 id = 2;
+}
+
+message GetResponse {
+    int32 api = 1;
+    Todo todo = 2;
+}
+
+message GetAllRequest {
+    int32 api = 1;
+    enum QueryParams {
+        ALL = 0;
+        COMPLETED = 1;
+        DATE = 2;
+    }
+    QueryParams queryParams = 2;
+}
+
+message GetAllResponse {
+    int32 api = 1;
+    repeated Todo todos = 2;
+}
+
+// UPDATE
+message UpdateRequest {
+    int32 api = 1;
+    Todo todo = 2;
+}
+
+message UpdateResponse {
+    int32 api = 1;
+    Todo todo = 2;
+}
+
+// DELETE
+message DeleteRequest {
+    int32 api = 1;
+    int32 id = 2;
+}
+
+message DeleteResponse {
+    int32 api = 1;
+    int32 id = 2;
+}
+
+
